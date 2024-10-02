@@ -1,5 +1,3 @@
-<img width="1440" alt="repocloner2" src="https://github.com/user-attachments/assets/7945fb8a-a14f-4963-997f-ca8fb865d0ad"># RepoGenie: Your AI-Powered Project Setup Assistant
-
 **Effortlessly clone, install, and optimize your projects with RepoGenie – the AI-powered setup assistant!**
 
 ## 🚀 Overview
@@ -61,7 +59,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 We welcome contributions! Please check out our [Contributing Guide](CONTRIBUTING.md) for more details on how to get started.
 
 ---
-
 *Try RepoGenie with a random portfolio link to see it in action!*
 
 <img width="1440" alt="repocloner" src="https://github.com/user-attachments/assets/c88bc9e9-590c-448b-b9f7-c12e4a8c9cbc">
