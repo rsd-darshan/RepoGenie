@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI GitHub Repo Cloner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1a1a1a;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        #new-chat {
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            color: inherit;
+            font-weight: 700;
+        }
+
+        #new-chat h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .explore-input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .menu li {
+            padding: 10px;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 400;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .menu li:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .main {
+            flex: 1;
+            background-color: #f0f5ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            background-image: url('static/bot.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .bot {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bot img {
+            display: none;
+        }
+
+        .user-prompt {
+            width: 90%;
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 30px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .user-prompt input {
+            width: 250%;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 20px;
+            border: 1px solid #d3d0d0;
+            box-sizing: border-box;
+        }
+
+        .user-prompt button {
+            padding: 10px 20px;
+            background-color: #0d6efd;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 700;
+        }
+
+        .user-prompt button:hover {
+            background-color: #0056b3;
+        }
+
+        .right-sidebar {
+            width: 300px;
+            background-color: #1a1a1a;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #444;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
+        .right-sidebar h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #replace-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        #replace-form label {
+            margin: 10px 0 5px;
+            font-size: 16px;
+            color: #ccc;
+            font-weight: 400;
+            width: 100%;
+            text-align: left;
+        }
+
+        #replace-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        #replace-form input::placeholder {
+            color: #bbb;
+        }
+
+        #replace-form input:focus {
+            border-color: #0d6efd;
+            background-color: #2a2a2a;
+        }
+
+        #replace-form button {
+            padding: 10px 20px;
+            background-color: #0d6efd;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 700;
+            width: 100%;
+            text-align: center;
+        }
+
+        #replace-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .right-sidebar .tips {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="#" id="new-chat">
+                <h1>AI Agents - Here To Help!</h1>
+            </a>
+            <input type="text" placeholder="Explore" class="explore-input">
+            <ul class="menu">
+                <li id="now-chat">New Chat</li>
+                <li>Clone Other Projects</li>
+                <li>Agents</li>
+                <li>ChatBot</li>
+                <li>Official Website</li>
+                <li>PC Software</li>
+                <li>About Us</li>
+                <li>Team</li>
+                <li>Buy Premium</li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="header">
+                <h2>[ AI GitHub Repo Cloner ]</h2>
+                <p>- Web Project Builder -</p>
+            </div>
+            <div class="content">
+                <div class="bot">
+                    <img src="static/bot.png" alt="Bot Image">
+                </div>
+            </div>
+            <div class="user-prompt">
+                <form id="clone-form" onsubmit="cloneRepo(event)">
+                    <input type="text" id="repo_url" name="repo_url" placeholder="Enter repo URL..." required>
+                    <button type="submit">Clone</button>
+                </form>
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <h3>Word Replacement</h3>
+            <form id="replace-form" onsubmit="replaceWords(event)">
+                <label for="search_text">Search Text:</label>
+                <input type="text" id="search_text" name="search_text" required placeholder="Enter text to search">
+                <label for="replace_text">Replace Text:</label>
+                <input type="text" id="replace_text" name="replace_text" required placeholder="Enter replacement text">
+                <button type="submit">Replace</button>
+            </form>
+            <div class="tips">
+                <p>Tip: Make sure the search text exists in the content.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function cloneRepo(event) {
+            event.preventDefault();
+            const repoUrl = document.getElementById('repo_url').value;
+
+            fetch('/clone', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'repo_url': repoUrl
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || "Repository cloning started.");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function replaceWords(event) {
+            event.preventDefault();
+            const searchText = document.getElementById('search_text').value;
+            const replaceText = document.getElementById('replace_text').value;
+
+            fetch('/replace', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'search_text': searchText,
+                    'replace_text': replaceText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || "Word replacement started.");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
