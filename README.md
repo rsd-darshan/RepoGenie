@@ -1,3 +1,5 @@
+# RepoGenie: Your AI-Powered Project Setup Assistant
+
 **Effortlessly clone, install, and optimize your projects with RepoGenie – the AI-powered setup assistant!**
 
 ## 🚀 Overview
@@ -13,6 +15,8 @@ RepoGenie simplifies the process of setting up projects from GitHub repositories
 - **File Handling**: Manages files by adding, removing, or editing them to ensure your environment is perfectly configured.
 - **Multi-language Support**: Handles projects in Python, Node.js, and more.
 - **Optimizes for Compatibility**: Ensures the project is compatible with your device and ready to run.
+- **Website Word Replacement**: If you're cloning a website, RepoGenie provides a word replacement function. Users can manually remove or change words from the website or code.
+- **Premium Word & Photo Replacement**: With the premium feature, users can provide 2-10 sentences they want to change, along with a short description. Our advanced AI will replace all specified words across the website, including photos, to match the new context.
 
 ## 🛠️ Installation
 
@@ -48,7 +52,8 @@ RepoGenie simplifies the process of setting up projects from GitHub repositories
 
 1. Enter the GitHub repository link you want to clone in the input field.
 2. RepoGenie will automatically clone the repository, install the dependencies, and handle any necessary file operations.
-3. Once the setup is complete, you’ll be ready to run the project on your device without any manual configuration.
+3. Use the word replacement function for websites to manually change or remove words from the cloned project.
+4. For the premium feature, provide 2-10 sentences you want to change along with a description, and let our AI update the website content and photos accordingly.
 
 ## 📜 License
 
@@ -59,6 +64,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 We welcome contributions! Please check out our [Contributing Guide](CONTRIBUTING.md) for more details on how to get started.
 
 ---
+
+**RepoGenie** – Taking the hassle out of project setup, so you can focus on what really matters: **coding**!
+
+---
+
 *Try RepoGenie with a random portfolio link to see it in action!*
 
 <img width="1440" alt="repocloner" src="https://github.com/user-attachments/assets/c88bc9e9-590c-448b-b9f7-c12e4a8c9cbc">
